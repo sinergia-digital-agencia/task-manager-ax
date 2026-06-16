@@ -929,12 +929,11 @@ async function apiGet(params) {
 }
 
 async function apiPost(data) {
+  // Usamos GET con param ?action=X&data=JSON para evitar CORS preflight
   const u = apiUrl(); if (!u) return null;
-  const r = await fetch(u, {
-    method: 'POST',
-    headers: { 'Content-Type': 'text/plain' },
-    body: JSON.stringify(data),
-  });
+  const action = data.action || '';
+  const encoded = encodeURIComponent(JSON.stringify(data));
+  const r = await fetch(u + '?action=' + action + '&data=' + encoded);
   if (!r.ok) throw new Error('HTTP ' + r.status);
   return r.json();
 }
