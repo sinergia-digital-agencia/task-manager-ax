@@ -1313,7 +1313,7 @@ function openEditTask(id) {
   $('mt-title').textContent = 'Editar tarea';
   $('t-titulo').value = t.titulo||'';
   $('t-desc').value   = t.descripcion||'';
-  $('t-fecha').value  = t.fecha_entrega||'';
+  $('t-fecha').value  = t.fecha_entrega ? String(t.fecha_entrega).split('T')[0].split(' ')[0] : '';
   $('t-estado').value = t.estado||'PENDIENTE';
   $('t-prio').value   = t.prioridad||'NORMAL';
   $('t-notes').value  = t.notas_actualizacion||'';
